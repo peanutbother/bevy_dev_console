@@ -24,16 +24,16 @@ pub const COMMAND_MESSAGE_NAME: &str = "console_command";
 pub const COMMAND_RESULT_NAME: &str = "console_result";
 
 #[derive(Default, Resource)]
-pub(crate) struct ConsoleUiState {
+pub struct ConsoleUiState {
     /// Wherever the console is open or not.
-    pub(crate) open: bool,
+    pub open: bool,
     /// Whether we have set focus this open or not.
-    pub(crate) text_focus: bool,
+    pub text_focus: bool,
     /// A list of all log messages received plus an
     /// indicator indicating if the message is new.
-    pub(crate) log: Vec<(LogMessage, bool)>,
+    pub log: Vec<(LogMessage, bool)>,
     /// The command in the text bar.
-    pub(crate) command: String,
+    pub command: String,
 }
 
 fn system_time_to_chrono_utc(t: SystemTime) -> chrono::DateTime<chrono::Utc> {
@@ -43,13 +43,13 @@ fn system_time_to_chrono_utc(t: SystemTime) -> chrono::DateTime<chrono::Utc> {
     chrono::Utc.timestamp_opt(sec, nsec).unwrap()
 }
 
-pub(crate) fn read_logs(mut logs: EventReader<LogMessage>, mut state: ResMut<ConsoleUiState>) {
+pub fn read_logs(mut logs: EventReader<LogMessage>, mut state: ResMut<ConsoleUiState>) {
     for log_message in logs.read() {
         state.log.push((log_message.clone(), true));
     }
 }
 
-pub(crate) fn open_close_ui(
+pub fn open_close_ui(
     mut state: ResMut<ConsoleUiState>,
     key: Res<ButtonInput<KeyCode>>,
     config: Res<ConsoleConfig>,
@@ -60,7 +60,7 @@ pub(crate) fn open_close_ui(
     }
 }
 
-pub(crate) fn render_ui(
+pub fn render_ui(
     mut contexts: EguiContexts,
     mut commands: Commands,
     mut state: ResMut<ConsoleUiState>,
