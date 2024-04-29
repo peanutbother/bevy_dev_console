@@ -131,7 +131,7 @@ pub trait CommandParser: Send + Sync + 'static {
     fn parse(&self, command: &str, world: &mut World);
 }
 
-pub(crate) struct ExecuteCommand(pub String);
+pub struct ExecuteCommand(pub String);
 impl Command for ExecuteCommand {
     fn apply(self, world: &mut World) {
         if let Some(parser) = world.remove_resource::<DefaultCommandParser>() {

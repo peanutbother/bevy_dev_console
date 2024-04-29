@@ -8,7 +8,7 @@ use tracing_subscriber::registry::LookupSpan;
 use tracing_subscriber::Layer;
 
 #[derive(Default)]
-pub(crate) struct AndroidLayer;
+pub struct AndroidLayer;
 
 struct StringRecorder(String, bool);
 impl StringRecorder {
