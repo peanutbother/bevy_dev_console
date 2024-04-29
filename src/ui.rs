@@ -148,7 +148,7 @@ pub fn render_ui(
         });
 }
 
-fn add_log(
+pub fn add_log(
     ui: &mut egui::Ui,
     id: usize,
     event: &LogMessage,
